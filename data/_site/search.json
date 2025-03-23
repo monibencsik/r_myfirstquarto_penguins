@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "first_quarto.html",
+    "href": "first_quarto.html",
+    "title": "Dimensions of penguins",
+    "section": "",
+    "text": "This is a first project fully executed in R with support from RStudio and Quarto.\nHere, we’ll look into analyzing the dimensions of Adelie, Chinstrap and Gentoo penguins from the original data set.\nAbout the data:\nData were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network.\nWe gratefully acknowledge Palmer Station LTER and the US LTER Network. Special thanks to Marty Downs (Director, LTER Network Office) for help regarding the data license & use.\n\n\n\nPenguins ahoy!"
+  },
+  {
+    "objectID": "first_quarto.html#introduction",
+    "href": "first_quarto.html#introduction",
+    "title": "Dimensions of penguins",
+    "section": "",
+    "text": "This is a first project fully executed in R with support from RStudio and Quarto.\nHere, we’ll look into analyzing the dimensions of Adelie, Chinstrap and Gentoo penguins from the original data set.\nAbout the data:\nData were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network.\nWe gratefully acknowledge Palmer Station LTER and the US LTER Network. Special thanks to Marty Downs (Director, LTER Network Office) for help regarding the data license & use.\n\n\n\nPenguins ahoy!"
+  },
+  {
+    "objectID": "first_quarto.html#lets-get-the-party-started",
+    "href": "first_quarto.html#lets-get-the-party-started",
+    "title": "Dimensions of penguins",
+    "section": "Let’s get the party started!",
+    "text": "Let’s get the party started!\nWe should start with importing all necessary packages for the code, which should include tidyverse and palmerpenguins .\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(palmerpenguins)\n\nWe will use the penguins dataset from the palmerpenguins package."
+  },
+  {
+    "objectID": "first_quarto.html#species",
+    "href": "first_quarto.html#species",
+    "title": "Dimensions of penguins",
+    "section": "Species",
+    "text": "Species\nTo plot the species, load the dataset and configure ggplot:\n\npenguins\n\n# A tibble: 344 × 8\n   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n 1 Adelie  Torgersen           39.1          18.7               181        3750\n 2 Adelie  Torgersen           39.5          17.4               186        3800\n 3 Adelie  Torgersen           40.3          18                 195        3250\n 4 Adelie  Torgersen           NA            NA                  NA          NA\n 5 Adelie  Torgersen           36.7          19.3               193        3450\n 6 Adelie  Torgersen           39.3          20.6               190        3650\n 7 Adelie  Torgersen           38.9          17.8               181        3625\n 8 Adelie  Torgersen           39.2          19.6               195        4675\n 9 Adelie  Torgersen           34.1          18.1               193        3475\n10 Adelie  Torgersen           42            20.2               190        4250\n# ℹ 334 more rows\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;\n\n\nType in the glimpse command to list the available columns:\n\nglimpse(penguins)\n\nRows: 344\nColumns: 8\n$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…\n$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…\n$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …\n$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …\n$ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…\n$ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …\n$ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male…\n$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…\n\n\nIt seems that the columns\n\nspecies\nflipper_length_mm\nbody_mass_g\n\nare exactly what we need for the visualisation!"
+  },
+  {
+    "objectID": "first_quarto.html#first-plot-in-r",
+    "href": "first_quarto.html#first-plot-in-r",
+    "title": "Dimensions of penguins",
+    "section": "First plot in R!",
+    "text": "First plot in R!\nNow that we know what we want, customise the ggplot command to visualize the scatter plot (Figure 1):\n\nggplot(\n  data = penguins,\n  mapping = aes(x = flipper_length_mm, y = body_mass_g)\n) +\n  geom_point(aes(color = species, shape = species)) +\n  geom_smooth(method = \"lm\") +\n  labs(\n    title = \"Body mass and flipper length\",\n    subtitle = \"Dimensions for Adelie, Chinstrap, and Gentoo Penguins\",\n    x = \"Flipper length (mm)\", y = \"Body mass (g)\",\n    color = \"Species\", shape = \"Species\"\n  ) \n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 2 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 2 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\nFigure 1: Scatter plot of the relationship between the body mass and the flipper length"
+  },
+  {
+    "objectID": "first_quarto.html#summary",
+    "href": "first_quarto.html#summary",
+    "title": "Dimensions of penguins",
+    "section": "Summary",
+    "text": "Summary\nFrom here, we can summarise that the Gentoo penguins are heavier and bigger, therefore their flippers are longer, whereas the Adelie penguins are smaller with short flippers.\n\nVery cute!"
+  },
+  {
+    "objectID": "first_quarto.html#disclaimer",
+    "href": "first_quarto.html#disclaimer",
+    "title": "Dimensions of penguins",
+    "section": "Disclaimer",
+    "text": "Disclaimer\nThis project followed instructions from the following sources:\n\nYoutube video: Get started with Quarto | Mine Çetinkaya-Rundel PositPBC\nR for Data Science (2e) official website\nRStudio IDE User Guide release 2024.09.0 revision 39 published 2024-10-01\nCRAN R Project\n\n20 October 2024 Huntingdon, UK"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This project was created to learn about R, data visualisation and publishing with Quarto."
+  },
+  {
+    "objectID": "about.html#about",
+    "href": "about.html#about",
+    "title": "About",
+    "section": "",
+    "text": "This project was created to learn about R, data visualisation and publishing with Quarto."
+  }
+]

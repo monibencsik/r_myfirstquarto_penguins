@@ -1,0 +1,9 @@
+project: 
+  type: website
+  
+website: 
+  title: "Welcome to my first R project"
+  navbar: 
+    left: 
+      - first_quarto.qmd
+      - about.qmd

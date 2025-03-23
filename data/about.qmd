@@ -1,0 +1,8 @@
+---
+title: "About"
+format: html
+---
+
+## About
+
+This project was created to learn about R, data visualisation and publishing with Quarto.

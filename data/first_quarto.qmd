@@ -1,0 +1,97 @@
+---
+title: "Dimensions of penguins"
+author: Monika B
+format: html
+editor: visual
+---
+
+## Introduction
+
+This is a first project fully executed in R with support from RStudio and Quarto.
+
+Here, we'll look into analyzing the dimensions of Adelie, Chinstrap and Gentoo penguins from the original [data set](https://github.com/allisonhorst/palmerpenguins/).
+
+**About the data:**
+
+Data were collected and made available by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) and the [Palmer Station, Antarctica LTER](https://pallter.marine.rutgers.edu/), a member of the [Long Term Ecological Research Network](https://lternet.edu/).
+
+We gratefully acknowledge Palmer Station LTER and the US LTER Network. Special thanks to Marty Downs (Director, LTER Network Office) for help regarding the data license & use.
+
+![Penguins ahoy!](4092622.jpg){fig-align="center" width="248"}
+
+## Let's get the party started!
+
+We should start with importing all necessary packages for the code, which should include tidyverse and palmerpenguins .
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+We will use the penguins dataset from the palmerpenguins package.
+
+## Species
+
+To plot the species, load the dataset and configure ggplot:
+
+```{r}
+penguins
+```
+
+Type in the glimpse command to list the available columns:
+
+```{r}
+glimpse(penguins)
+```
+
+It seems that the columns
+
+-   species
+
+-   flipper_length_mm
+
+-   body_mass_g
+
+are exactly what we need for the visualisation!
+
+## First plot in R!
+
+Now that we know what we want, customise the ggplot command to visualize the scatter plot (@fig-bodymass_flipperlength_plot):
+
+```{r}
+#| label: fig-bodymass_flipperlength_plot
+#| fig-cap: Scatter plot of the relationship between the body mass and the flipper length
+
+ggplot(
+  data = penguins,
+  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+) +
+  geom_point(aes(color = species, shape = species)) +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Body mass and flipper length",
+    subtitle = "Dimensions for Adelie, Chinstrap, and Gentoo Penguins",
+    x = "Flipper length (mm)", y = "Body mass (g)",
+    color = "Species", shape = "Species"
+  ) 
+```
+
+## Summary
+
+From here, we can summarise that the [Gentoo penguins](https://en.wikipedia.org/wiki/Gentoo_penguin) are heavier and bigger, therefore their flippers are longer, whereas the [Adelie penguins](https://en.wikipedia.org/wiki/Ad%C3%A9lie_penguin) are smaller with short flippers.
+
+#### Very cute!
+
+## Disclaimer
+
+This project followed instructions from the following sources:
+
+-   Youtube video: **Get started with Quarto \| Mine Çetinkaya-Rundel [PositPBC](https://youtube.com/@positpbc?si=NzrtMMiiVb2ZRG8Y)**
+
+-   [R for Data Science (2e)](https://r4ds.hadley.nz/) official website
+
+-   [RStudio IDE User Guide](https://docs.posit.co/ide/user/) release 2024.09.0 revision 39 published 2024-10-01
+
+-   [CRAN R Project](https://cran.r-project.org/)
+
+20 October 2024 Huntingdon, UK
